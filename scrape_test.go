@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/taam-cloud-go"
-	"github.com/stainless-sdks/taam-cloud-go/internal/testutil"
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/testutil"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 func TestScrapeNewWithOptionalParams(t *testing.T) {

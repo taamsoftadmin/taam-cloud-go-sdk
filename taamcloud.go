@@ -7,9 +7,9 @@ import (
 	"io"
 	"mime/multipart"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal/apiform"
-	"github.com/stainless-sdks/taam-cloud-go/internal/apijson"
-	"github.com/stainless-sdks/taam-cloud-go/internal/param"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apiform"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apijson"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/param"
 )
 
 type UploadResponse struct {
