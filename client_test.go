@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/taam-cloud-go"
-	"github.com/stainless-sdks/taam-cloud-go/internal"
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 type closureTransport struct {

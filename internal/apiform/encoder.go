@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal/param"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

@@ -17,10 +17,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal"
-	"github.com/stainless-sdks/taam-cloud-go/internal/apierror"
-	"github.com/stainless-sdks/taam-cloud-go/internal/apiform"
-	"github.com/stainless-sdks/taam-cloud-go/internal/apiquery"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apierror"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apiform"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {
