@@ -1,6 +1,6 @@
 # Taam Cloud Go API Library
 
-<a href="https://pkg.go.dev/github.com/stainless-sdks/taam-cloud-go"><img src="https://pkg.go.dev/badge/github.com/stainless-sdks/taam-cloud-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/taamsoftadmin/taam-cloud-go-sdk"><img src="https://pkg.go.dev/badge/github.com/taamsoftadmin/taam-cloud-go-sdk.svg" alt="Go Reference"></a>
 
 The Taam Cloud Go library provides convenient access to [the Taam Cloud REST
 API](https://docs.taam-cloud.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
@@ -9,17 +9,25 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Installation
 
+<!-- x-release-please-start-version -->
+
 ```go
 import (
-	"github.com/stainless-sdks/taam-cloud-go" // imported as taamcloud
+	"github.com/taamsoftadmin/taam-cloud-go-sdk" // imported as taamcloud
 )
 ```
 
+<!-- x-release-please-end -->
+
 Or to pin the version:
 
+<!-- x-release-please-start-version -->
+
 ```sh
-go get -u 'github.com/stainless-sdks/taam-cloud-go@v0.0.1-alpha.0'
+go get -u 'github.com/taamsoftadmin/taam-cloud-go-sdk@v0.0.1-alpha.1'
 ```
+
+<!-- x-release-please-end -->
 
 ## Requirements
 
@@ -35,8 +43,8 @@ package main
 import (
 	"context"
 
-	"github.com/stainless-sdks/taam-cloud-go"
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 func main() {
@@ -147,7 +155,7 @@ client.Embeddings.New(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/stainless-sdks/taam-cloud-go/option).
+See the [full list of request options](https://pkg.go.dev/github.com/taamsoftadmin/taam-cloud-go-sdk/option).
 
 ### Pagination
 
@@ -340,7 +348,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/taam-cloud-go/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/taamsoftadmin/taam-cloud-go-sdk/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 
