@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/taam-cloud-go
+module github.com/taamsoftadmin/taam-cloud-go-sdk
 
 go 1.21
 

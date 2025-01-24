@@ -3,7 +3,7 @@
 package taamcloud
 
 import (
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 // ChatService contains methods and other services that help with interacting with

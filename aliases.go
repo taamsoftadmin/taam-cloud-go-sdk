@@ -3,7 +3,7 @@
 package taamcloud
 
 import (
-	"github.com/stainless-sdks/taam-cloud-go/internal/apierror"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apierror"
 )
 
 type Error = apierror.Error

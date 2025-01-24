@@ -6,10 +6,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal/apijson"
-	"github.com/stainless-sdks/taam-cloud-go/internal/param"
-	"github.com/stainless-sdks/taam-cloud-go/internal/requestconfig"
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/apijson"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/param"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/requestconfig"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 // SunoMusicService contains methods and other services that help with interacting

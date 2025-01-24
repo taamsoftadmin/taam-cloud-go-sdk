@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal/param"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/param"
 )
 
 type Struct struct {

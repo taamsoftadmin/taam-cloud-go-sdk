@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/stainless-sdks/taam-cloud-go/internal/requestconfig"
-	"github.com/stainless-sdks/taam-cloud-go/option"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/internal/requestconfig"
+	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
 // Client creates a struct with services and top level methods that help with
