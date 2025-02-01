@@ -24,11 +24,12 @@ func TestUsage(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
+	embeddingsResponse, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
 		Input: taamcloud.F([]string{"string"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	})
 	if err != nil {
 		t.Error(err)
 	}
+	t.Logf("%+v\n", embeddingsResponse)
 }
