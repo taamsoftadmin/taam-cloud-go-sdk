@@ -42,6 +42,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/taamsoftadmin/taam-cloud-go-sdk"
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
@@ -59,6 +60,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+	fmt.Printf("%+v\n", embeddingsResponse)
 }
 
 ```
@@ -251,6 +253,31 @@ client.Embeddings.New(
 	},
 	option.WithMaxRetries(5),
 )
+```
+
+### Accessing raw response data (e.g. response headers)
+
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
+you need to examine response headers, status codes, or other details.
+
+```go
+// Create a variable to store the HTTP response
+var response *http.Response
+embeddingsResponse, err := client.Embeddings.New(
+	context.TODO(),
+	taamcloud.EmbeddingNewParams{
+		Input: taamcloud.F([]string{"string"}),
+		Model: taamcloud.F("jina-embeddings-v3"),
+	},
+	option.WithResponseInto(&response),
+)
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n", embeddingsResponse)
+
+fmt.Printf("Status Code: %d\n", response.StatusCode)
+fmt.Printf("Headers: %+#v\n", response.Header)
 ```
 
 ### Making custom/undocumented requests
