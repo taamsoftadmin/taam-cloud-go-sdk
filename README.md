@@ -5,7 +5,7 @@
 The Taam Cloud Go library provides convenient access to [the Taam Cloud REST
 API](https://docs.taam-cloud.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/taamsoftadmin/taam-cloud-go-sdk@v0.0.1-alpha.1'
+go get -u 'github.com/taamsoftadmin/taam-cloud-go-sdk@v0.1.0-alpha.1'
 ```
 
 <!-- x-release-please-end -->
@@ -42,6 +42,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/taamsoftadmin/taam-cloud-go-sdk"
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
@@ -59,6 +60,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+	fmt.Printf("%+v\n", embeddingsResponse)
 }
 
 ```
@@ -228,6 +230,24 @@ file returned by `os.Open` will be sent with the file name on disk.
 We also provide a helper `taamcloud.FileParam(reader io.Reader, filename string, contentType string)`
 which can be used to wrap any `io.Reader` with the appropriate file name and content type.
 
+```go
+// A file from the file system
+file, err := os.Open("/path/to/file")
+taamcloud.UploadParams{
+	File: taamcloud.F[io.Reader](file),
+}
+
+// A file from a string
+taamcloud.UploadParams{
+	File: taamcloud.F[io.Reader](strings.NewReader("my file contents")),
+}
+
+// With a custom filename and contentType
+taamcloud.UploadParams{
+	File: taamcloud.FileParam(strings.NewReader(`{"hello": "foo"}`), "file.go", "application/json"),
+}
+```
+
 ### Retries
 
 Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
@@ -251,6 +271,31 @@ client.Embeddings.New(
 	},
 	option.WithMaxRetries(5),
 )
+```
+
+### Accessing raw response data (e.g. response headers)
+
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
+you need to examine response headers, status codes, or other details.
+
+```go
+// Create a variable to store the HTTP response
+var response *http.Response
+embeddingsResponse, err := client.Embeddings.New(
+	context.TODO(),
+	taamcloud.EmbeddingNewParams{
+		Input: taamcloud.F([]string{"string"}),
+		Model: taamcloud.F("jina-embeddings-v3"),
+	},
+	option.WithResponseInto(&response),
+)
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n", embeddingsResponse)
+
+fmt.Printf("Status Code: %d\n", response.StatusCode)
+fmt.Printf("Headers: %+#v\n", response.Header)
 ```
 
 ### Making custom/undocumented requests

@@ -29,7 +29,7 @@ func TestMapDiscoverWithOptionalParams(t *testing.T) {
 		URL:               taamcloud.F("url"),
 		IgnoreSitemap:     taamcloud.F(true),
 		IncludeSubdomains: taamcloud.F(true),
-		Limit:             taamcloud.F(int64(0)),
+		Limit:             taamcloud.F(int64(5000)),
 		Search:            taamcloud.F("search"),
 		SitemapOnly:       taamcloud.F(true),
 	})
