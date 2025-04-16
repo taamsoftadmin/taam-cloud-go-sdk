@@ -13,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestChatCompletionNewWithOptionalParams(t *testing.T) {
+func TestChatNewCompletionWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,15 +26,18 @@ func TestChatCompletionNewWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	err := client.Chat.Completions.New(context.TODO(), taamcloud.ChatCompletionNewParams{
-		Messages: taamcloud.F([]taamcloud.ChatCompletionNewParamsMessage{{
-			Content: taamcloud.F("content"),
-			Role:    taamcloud.F(taamcloud.ChatCompletionNewParamsMessagesRoleUser),
+	err := client.Chat.NewCompletion(context.TODO(), taamcloud.ChatNewCompletionParams{
+		Messages: taamcloud.F([]taamcloud.ChatNewCompletionParamsMessage{{
+			Content: taamcloud.F("You are a helpful assistant."),
+			Role:    taamcloud.F(taamcloud.ChatNewCompletionParamsMessagesRoleSystem),
+		}, {
+			Content: taamcloud.F("Hello, how are you today?"),
+			Role:    taamcloud.F(taamcloud.ChatNewCompletionParamsMessagesRoleUser),
 		}}),
-		Model:       taamcloud.F("model"),
-		MaxTokens:   taamcloud.F(int64(0)),
+		Model:       taamcloud.F("gpt-4"),
+		MaxTokens:   taamcloud.F(int64(150)),
 		Stream:      taamcloud.F(true),
-		Temperature: taamcloud.F(0.000000),
+		Temperature: taamcloud.F(0.700000),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

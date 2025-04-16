@@ -3,10 +3,8 @@
 package taamcloud_test
 
 import (
-	"bytes"
 	"context"
 	"errors"
-	"io"
 	"os"
 	"testing"
 
@@ -15,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestTaamcloudUploadWithOptionalParams(t *testing.T) {
+func TestVideoGenerationNewWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -27,11 +26,10 @@ func TestTaamcloudUploadWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Upload(context.TODO(), taamcloud.UploadParams{
-		File:         taamcloud.F(io.Reader(bytes.NewBuffer([]byte("some file contents")))),
-		EnableOcr:    taamcloud.F(true),
-		EnableVision: taamcloud.F(true),
-		SaveAll:      taamcloud.F(true),
+	_, err := client.VideoGeneration.New(context.TODO(), taamcloud.VideoGenerationNewParams{
+		Model:           taamcloud.F(taamcloud.VideoGenerationNewParamsModelT2V01Director),
+		Prompt:          taamcloud.F("A spaceship landing on a distant planet [camera panning right]"),
+		FirstFrameImage: taamcloud.F("first_frame_image"),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

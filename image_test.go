@@ -13,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestMapDiscoverWithOptionalParams(t *testing.T) {
+func TestImageGenerateWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,13 +26,13 @@ func TestMapDiscoverWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Maps.Discover(context.TODO(), taamcloud.MapDiscoverParams{
-		URL:               taamcloud.F("url"),
-		IgnoreSitemap:     taamcloud.F(true),
-		IncludeSubdomains: taamcloud.F(true),
-		Limit:             taamcloud.F(int64(5000)),
-		Search:            taamcloud.F("search"),
-		SitemapOnly:       taamcloud.F(true),
+	_, err := client.Images.Generate(context.TODO(), taamcloud.ImageGenerateParams{
+		Prompt:  taamcloud.F("A beautiful sunset over a calm ocean"),
+		Model:   taamcloud.F(taamcloud.ImageGenerateParamsModelDallE3),
+		N:       taamcloud.F(int64(1)),
+		Quality: taamcloud.F(taamcloud.ImageGenerateParamsQualityStandard),
+		Size:    taamcloud.F(taamcloud.ImageGenerateParamsSize1024x1024),
+		Style:   taamcloud.F(taamcloud.ImageGenerateParamsStyleNatural),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

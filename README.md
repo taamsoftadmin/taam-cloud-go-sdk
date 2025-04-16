@@ -2,8 +2,8 @@
 
 <a href="https://pkg.go.dev/github.com/taamsoftadmin/taam-cloud-go-sdk"><img src="https://pkg.go.dev/badge/github.com/taamsoftadmin/taam-cloud-go-sdk.svg" alt="Go Reference"></a>
 
-The Taam Cloud Go library provides convenient access to [the Taam Cloud REST
-API](https://docs.taam-cloud.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
+The Taam Cloud Go library provides convenient access to the [Taam Cloud REST API](https://docs.taam.cloud)
+from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -50,17 +50,16 @@ import (
 
 func main() {
 	client := taamcloud.NewClient(
-		option.WithBearerToken("My Bearer Token"), // defaults to os.LookupEnv("BEARER_TOKEN")
-		option.WithEnvironmentEnvironment1(),      // or option.WithEnvironmentProduction() | option.WithEnvironmentEnvironment2() | option.WithEnvironmentEnvironment3(); defaults to option.WithEnvironmentProduction()
+		option.WithBearerToken("My Bearer Token"), // defaults to os.LookupEnv("TAAM_CLOUD_BEARER_TOKEN")
 	)
-	embeddingsResponse, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
-		Input: taamcloud.F([]string{"string"}),
+	embedding, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
+		Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", embeddingsResponse)
+	fmt.Printf("%+v\n", embedding)
 }
 
 ```
@@ -179,7 +178,7 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
 _, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
-	Input: taamcloud.F([]string{"string"}),
+	Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 	Model: taamcloud.F("jina-embeddings-v3"),
 })
 if err != nil {
@@ -209,7 +208,7 @@ defer cancel()
 client.Embeddings.New(
 	ctx,
 	taamcloud.EmbeddingNewParams{
-		Input: taamcloud.F([]string{"string"}),
+		Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	},
 	// This sets the per-retry timeout
@@ -233,17 +232,17 @@ which can be used to wrap any `io.Reader` with the appropriate file name and con
 ```go
 // A file from the file system
 file, err := os.Open("/path/to/file")
-taamcloud.UploadParams{
+taamcloud.FileUploadParams{
 	File: taamcloud.F[io.Reader](file),
 }
 
 // A file from a string
-taamcloud.UploadParams{
+taamcloud.FileUploadParams{
 	File: taamcloud.F[io.Reader](strings.NewReader("my file contents")),
 }
 
 // With a custom filename and contentType
-taamcloud.UploadParams{
+taamcloud.FileUploadParams{
 	File: taamcloud.FileParam(strings.NewReader(`{"hello": "foo"}`), "file.go", "application/json"),
 }
 ```
@@ -266,7 +265,7 @@ client := taamcloud.NewClient(
 client.Embeddings.New(
 	context.TODO(),
 	taamcloud.EmbeddingNewParams{
-		Input: taamcloud.F([]string{"string"}),
+		Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	},
 	option.WithMaxRetries(5),
@@ -281,10 +280,10 @@ you need to examine response headers, status codes, or other details.
 ```go
 // Create a variable to store the HTTP response
 var response *http.Response
-embeddingsResponse, err := client.Embeddings.New(
+embedding, err := client.Embeddings.New(
 	context.TODO(),
 	taamcloud.EmbeddingNewParams{
-		Input: taamcloud.F([]string{"string"}),
+		Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	},
 	option.WithResponseInto(&response),
@@ -292,7 +291,7 @@ embeddingsResponse, err := client.Embeddings.New(
 if err != nil {
 	// handle error
 }
-fmt.Printf("%+v\n", embeddingsResponse)
+fmt.Printf("%+v\n", embedding)
 
 fmt.Printf("Status Code: %d\n", response.StatusCode)
 fmt.Printf("Headers: %+#v\n", response.Header)

@@ -31,7 +31,7 @@ func NewRerankService(opts ...option.RequestOption) (r *RerankService) {
 	return
 }
 
-// Rerank documents
+// Reorder a list of documents based on their relevance to a query
 func (r *RerankService) New(ctx context.Context, body RerankNewParams, opts ...option.RequestOption) (err error) {
 	opts = append(r.Options[:], opts...)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "")}, opts...)
