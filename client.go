@@ -15,29 +15,39 @@ import (
 // interacting with the taam-cloud API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options    []option.RequestOption
-	Embeddings *EmbeddingService
-	Rerank     *RerankService
-	Chat       *ChatService
-	Suno       *SunoService
-	Models     *ModelService
-	Images     *ImageService
-	Crawl      *CrawlService
-	Scrape     *ScrapeService
-	Maps       *MapService
-	Searches   *SearchService
+	Options         []option.RequestOption
+	Embeddings      *EmbeddingService
+	Rerank          *RerankService
+	Chat            *ChatService
+	Suno            *SunoService
+	Models          *ModelService
+	Images          *ImageService
+	Web             *WebService
+	Files           *FileService
+	Upload          *UploadService
+	VideoGeneration *VideoGenerationService
+	Query           *QueryService
+}
+
+// DefaultClientOptions read from the environment (TAAM_CLOUD_BEARER_TOKEN,
+// TAAM_CLOUD_BASE_URL). This should be used to initialize new clients.
+func DefaultClientOptions() []option.RequestOption {
+	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
+	if o, ok := os.LookupEnv("TAAM_CLOUD_BASE_URL"); ok {
+		defaults = append(defaults, option.WithBaseURL(o))
+	}
+	if o, ok := os.LookupEnv("TAAM_CLOUD_BEARER_TOKEN"); ok {
+		defaults = append(defaults, option.WithBearerToken(o))
+	}
+	return defaults
 }
 
 // NewClient generates a new client with the default option read from the
-// environment (BEARER_TOKEN). The option passed in as arguments are applied after
-// these default arguments, and all option will be passed down to the services and
-// requests that this client makes.
+// environment (TAAM_CLOUD_BEARER_TOKEN, TAAM_CLOUD_BASE_URL). The option passed in
+// as arguments are applied after these default arguments, and all option will be
+// passed down to the services and requests that this client makes.
 func NewClient(opts ...option.RequestOption) (r *Client) {
-	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
-	if o, ok := os.LookupEnv("BEARER_TOKEN"); ok {
-		defaults = append(defaults, option.WithBearerToken(o))
-	}
-	opts = append(defaults, opts...)
+	opts = append(DefaultClientOptions(), opts...)
 
 	r = &Client{Options: opts}
 
@@ -47,10 +57,11 @@ func NewClient(opts ...option.RequestOption) (r *Client) {
 	r.Suno = NewSunoService(opts...)
 	r.Models = NewModelService(opts...)
 	r.Images = NewImageService(opts...)
-	r.Crawl = NewCrawlService(opts...)
-	r.Scrape = NewScrapeService(opts...)
-	r.Maps = NewMapService(opts...)
-	r.Searches = NewSearchService(opts...)
+	r.Web = NewWebService(opts...)
+	r.Files = NewFileService(opts...)
+	r.Upload = NewUploadService(opts...)
+	r.VideoGeneration = NewVideoGenerationService(opts...)
+	r.Query = NewQueryService(opts...)
 
 	return
 }
@@ -122,12 +133,4 @@ func (r *Client) Patch(ctx context.Context, path string, params interface{}, res
 // response.
 func (r *Client) Delete(ctx context.Context, path string, params interface{}, res interface{}, opts ...option.RequestOption) error {
 	return r.Execute(ctx, http.MethodDelete, path, params, res, opts...)
-}
-
-// Upload and process files with optional OCR and Vision capabilities
-func (r *Client) Upload(ctx context.Context, body UploadParams, opts ...option.RequestOption) (res *UploadResponse, err error) {
-	opts = append(r.Options[:], opts...)
-	path := "upload"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
 }

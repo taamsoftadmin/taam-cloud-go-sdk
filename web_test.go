@@ -13,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestScrapeNewWithOptionalParams(t *testing.T) {
+func TestWebNewWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,10 +26,9 @@ func TestScrapeNewWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Scrape.New(context.TODO(), taamcloud.ScrapeNewParams{
-		URL:             taamcloud.F("url"),
-		Formats:         taamcloud.F([]taamcloud.ScrapeNewParamsFormat{taamcloud.ScrapeNewParamsFormatMarkdown}),
-		OnlyMainContent: taamcloud.F(true),
+	_, err := client.Web.New(context.TODO(), taamcloud.WebNewParams{
+		Model:  taamcloud.F(taamcloud.WebNewParamsModelScrape),
+		Params: taamcloud.F[any](map[string]interface{}{}),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

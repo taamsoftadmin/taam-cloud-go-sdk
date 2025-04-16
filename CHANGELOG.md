@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-04-16)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/taamsoftadmin/taam-cloud-go-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **client:** add support for reading base URL from environment variable ([1e8d670](https://github.com/taamsoftadmin/taam-cloud-go-sdk/commit/1e8d670b0a823a1c5f9db0fec3290972afd2f784))
+
+
+### Chores
+
+* **docs:** document pre-request options ([562c25e](https://github.com/taamsoftadmin/taam-cloud-go-sdk/commit/562c25e1f472421cd1e8506b109f4bc46a20178e))
+* **internal:** codegen related update ([2ab4123](https://github.com/taamsoftadmin/taam-cloud-go-sdk/commit/2ab412316cf05fca45c484d91abeb156777a7439))
+
 ## 0.1.0-alpha.1 (2025-02-28)
 
 Full Changelog: [v0.0.1-alpha.1...v0.1.0-alpha.1](https://github.com/taamsoftadmin/taam-cloud-go-sdk/compare/v0.0.1-alpha.1...v0.1.0-alpha.1)
