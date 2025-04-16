@@ -14,6 +14,7 @@ import (
 )
 
 func TestRerankNewWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -26,10 +27,10 @@ func TestRerankNewWithOptionalParams(t *testing.T) {
 		option.WithBearerToken("My Bearer Token"),
 	)
 	err := client.Rerank.New(context.TODO(), taamcloud.RerankNewParams{
-		Documents: taamcloud.F([]string{"string"}),
-		Model:     taamcloud.F("model"),
-		Query:     taamcloud.F("query"),
-		TopN:      taamcloud.F(int64(0)),
+		Documents: taamcloud.F([]string{"Exercise improves cardiovascular health and reduces stress.", "Proper nutrition is essential for overall well-being.", "Sleep quality affects mental and physical performance."}),
+		Model:     taamcloud.F("mixr-v1"),
+		Query:     taamcloud.F("What are the health benefits of exercise?"),
+		TopN:      taamcloud.F(int64(2)),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

@@ -13,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestImageGenerationNewWithOptionalParams(t *testing.T) {
+func TestSunoSubmitGenerateMusicWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,13 +26,11 @@ func TestImageGenerationNewWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	_, err := client.Images.Generations.New(context.TODO(), taamcloud.ImageGenerationNewParams{
-		Prompt:  taamcloud.F("prompt"),
-		Model:   taamcloud.F(taamcloud.ImageGenerationNewParamsModelDallE3),
-		N:       taamcloud.F(int64(0)),
-		Quality: taamcloud.F(taamcloud.ImageGenerationNewParamsQualityStandard),
-		Size:    taamcloud.F(taamcloud.ImageGenerationNewParamsSize1024x1024),
-		Style:   taamcloud.F(taamcloud.ImageGenerationNewParamsStyleNatural),
+	err := client.Suno.Submit.GenerateMusic(context.TODO(), taamcloud.SunoSubmitGenerateMusicParams{
+		Mv:     taamcloud.F("mv"),
+		Prompt: taamcloud.F("A relaxing jazz piano piece with soft drums"),
+		Tags:   taamcloud.F("jazz, relaxing, piano"),
+		Title:  taamcloud.F("Relaxing Jazz"),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

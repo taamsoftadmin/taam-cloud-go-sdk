@@ -31,15 +31,16 @@ func NewEmbeddingService(opts ...option.RequestOption) (r *EmbeddingService) {
 	return
 }
 
-// Generate embeddings
-func (r *EmbeddingService) New(ctx context.Context, body EmbeddingNewParams, opts ...option.RequestOption) (res *EmbeddingsResponse, err error) {
+// Create vector embeddings from text input for semantic search and similarity
+// operations
+func (r *EmbeddingService) New(ctx context.Context, body EmbeddingNewParams, opts ...option.RequestOption) (res *EmbeddingNewResponse, err error) {
 	opts = append(r.Options[:], opts...)
 	path := "v1/embeddings"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return
 }
 
-type EmbeddingsResponse = interface{}
+type EmbeddingNewResponse = interface{}
 
 type EmbeddingNewParams struct {
 	Input param.Field[[]string] `json:"input,required"`

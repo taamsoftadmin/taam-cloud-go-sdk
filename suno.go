@@ -14,7 +14,7 @@ import (
 // the [NewSunoService] method instead.
 type SunoService struct {
 	Options []option.RequestOption
-	Music   *SunoMusicService
+	Submit  *SunoSubmitService
 }
 
 // NewSunoService generates a new service that applies the given options to each
@@ -23,6 +23,6 @@ type SunoService struct {
 func NewSunoService(opts ...option.RequestOption) (r *SunoService) {
 	r = &SunoService{}
 	r.Options = opts
-	r.Music = NewSunoMusicService(opts...)
+	r.Submit = NewSunoSubmitService(opts...)
 	return
 }

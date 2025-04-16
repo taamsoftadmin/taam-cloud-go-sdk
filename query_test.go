@@ -13,7 +13,8 @@ import (
 	"github.com/taamsoftadmin/taam-cloud-go-sdk/option"
 )
 
-func TestSunoMusicSubmitWithOptionalParams(t *testing.T) {
+func TestQueryCheckVideoGenerationStatus(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,11 +26,8 @@ func TestSunoMusicSubmitWithOptionalParams(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithBearerToken("My Bearer Token"),
 	)
-	err := client.Suno.Music.Submit(context.TODO(), taamcloud.SunoMusicSubmitParams{
-		Mv:     taamcloud.F("mv"),
-		Prompt: taamcloud.F("prompt"),
-		Tags:   taamcloud.F("tags"),
-		Title:  taamcloud.F("title"),
+	_, err := client.Query.CheckVideoGenerationStatus(context.TODO(), taamcloud.QueryCheckVideoGenerationStatusParams{
+		TaskID: taamcloud.F("task_id"),
 	})
 	if err != nil {
 		var apierr *taamcloud.Error

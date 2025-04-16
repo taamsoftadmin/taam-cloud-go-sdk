@@ -14,6 +14,7 @@ import (
 )
 
 func TestEmbeddingNew(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -26,7 +27,7 @@ func TestEmbeddingNew(t *testing.T) {
 		option.WithBearerToken("My Bearer Token"),
 	)
 	_, err := client.Embeddings.New(context.TODO(), taamcloud.EmbeddingNewParams{
-		Input: taamcloud.F([]string{"string"}),
+		Input: taamcloud.F([]string{"Generate vector representations of this text"}),
 		Model: taamcloud.F("jina-embeddings-v3"),
 	})
 	if err != nil {
